@@ -1,0 +1,6 @@
+$kind: http-request
+name: https://localhost:7281/api/categories/10
+description: ""
+url: https://localhost:7281/api/categories
+method: GET
+order: 3986157442187854

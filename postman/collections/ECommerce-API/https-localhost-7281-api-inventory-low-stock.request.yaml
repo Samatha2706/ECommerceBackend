@@ -1,0 +1,6 @@
+$kind: http-request
+name: https://localhost:7281/api/inventory/low-stock
+description: ""
+url: https://localhost:7281/api/inventory/low-stock
+method: GET
+order: 4502177697486371

@@ -1,0 +1,13 @@
+$kind: http-request
+name: https://localhost:7281/api/categories/admin-test
+description: ""
+url: https://localhost:7281/api/categories/admin-test
+method: GET
+body:
+  type: json
+  content: ""
+auth:
+  type: bearer
+  credentials:
+    token: "{{supabase_service_role_api_key_0fiv}}"
+order: 4503362454515616

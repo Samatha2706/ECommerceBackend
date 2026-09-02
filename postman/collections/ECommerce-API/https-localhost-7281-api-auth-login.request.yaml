@@ -1,0 +1,15 @@
+$kind: http-request
+name: https://localhost:7281/api/auth/login
+description: ""
+url: https://localhost:7281/api/auth/login
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"email\": \"samatha@gmail.com\",\r
+
+    \    \"password\": \"630508\"\r
+
+    }"
+order: 4502927658800471

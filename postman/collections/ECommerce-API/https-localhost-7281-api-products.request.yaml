@@ -1,0 +1,23 @@
+$kind: http-request
+name: https://localhost:7281/api/products
+description: ""
+url: https://localhost:7281/api/products
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\": \"Phone\",\r
+
+    \    \"description\": \"Smart phone\",\r
+
+    \    \"price\": 30000,\r
+
+    \    \"categoryId\": 999,\r
+
+    \    \"initialQuantity\": 10,\r
+
+    \    \"reorderLevel\": 5\r
+
+    }"
+order: 4488604077390339

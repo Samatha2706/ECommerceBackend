@@ -1,0 +1,15 @@
+$kind: http-request
+name: https://localhost:7281/api/categories
+description: ""
+url: https://localhost:7281/api/categories
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\": \"Test Category\",\r
+
+    \    \"description\": \"Temporary category for testing\"\r
+
+    }"
+order: 4476749919177505

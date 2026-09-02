@@ -1,0 +1,15 @@
+$kind: http-request
+name: https://localhost:7281/api/categories/1
+description: ""
+url: https://localhost:7281/api/categories/1
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\": \"Electronics & Gadgets\",\r
+
+    \    \"description\": \"Electronic devices, gadgets and accessories\"\r
+
+    }"
+order: 4146908816347960

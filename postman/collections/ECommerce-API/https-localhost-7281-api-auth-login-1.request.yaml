@@ -1,0 +1,15 @@
+$kind: http-request
+name: https://localhost:7281/api/auth/login
+description: ""
+url: https://localhost:7281/api/auth/login
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"email\": \"somidiAdmin@gmail.com\",\r
+
+    \  \"password\": \"Admin@12345\"\r
+
+    }"
+order: 4503188017792029

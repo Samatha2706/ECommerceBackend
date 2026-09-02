@@ -1,0 +1,15 @@
+$kind: http-request
+name: https://localhost:7281/api/categories
+description: ""
+url: https://localhost:7281/api/categories
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\": \"Electronics\",\r
+
+    \    \"description\": \"Electronic devices and accessories\"\r
+
+    }"
+order: 2557678825106588

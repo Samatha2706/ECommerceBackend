@@ -1,0 +1,10 @@
+$kind: http-request
+name: https://localhost:7281/api/categories
+description: ""
+url: https://localhost:7281/api/categories
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{supabase_service_role_api_key_039u}}"
+order: 4503099094729111

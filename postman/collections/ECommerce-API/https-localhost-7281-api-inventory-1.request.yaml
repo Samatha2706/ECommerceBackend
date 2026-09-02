@@ -1,0 +1,15 @@
+$kind: http-request
+name: https://localhost:7281/api/inventory/1
+description: ""
+url: https://localhost:7281/api/inventory/1
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \    \"quantity\": 3,\r
+
+    \    \"reorderLevel\": 5\r
+
+    }"
+order: 4500678424443421

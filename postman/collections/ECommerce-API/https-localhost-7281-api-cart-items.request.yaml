@@ -1,0 +1,19 @@
+$kind: http-request
+name: https://localhost:7281/api/cart/items
+description: ""
+url: https://localhost:7281/api/cart/items
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"productId\": 1,\r
+
+    \  \"quantity\": 2\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{supabase_service_role_api_key_04cu}}"
+order: 4503593218916554
