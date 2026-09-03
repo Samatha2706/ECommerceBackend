@@ -1,0 +1,9 @@
+$kind: http-request
+description: ""
+url: https://localhost:7281/api/Cart
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0dat}}"
+order: 4501969269159702

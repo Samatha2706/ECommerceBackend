@@ -1,11 +1,14 @@
 ﻿using ECommerce.Application.DTOs.Products;
 using ECommerce.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Json;
 
 namespace ECommerce.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class ProductsController : ControllerBase
 {
     private readonly IProductService _productService;
@@ -17,6 +20,7 @@ public class ProductsController : ControllerBase
 
     // GET: api/products
     [HttpGet]
+    [AllowAnonymous]
     public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetAll()
     {
         var products = await _productService.GetAllAsync();
@@ -26,6 +30,7 @@ public class ProductsController : ControllerBase
 
     // GET: api/products/{id}
     [HttpGet("{id:int}")]
+    [AllowAnonymous]
     public async Task<ActionResult<ProductDto>> GetById(int id)
     {
         var product = await _productService.GetByIdAsync(id);
@@ -43,6 +48,7 @@ public class ProductsController : ControllerBase
 
     // POST: api/products
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<ProductDto>> Create(
         [FromBody] CreateProductDto createProductDto)
     {
@@ -67,6 +73,7 @@ public class ProductsController : ControllerBase
 
     // PUT: api/products/{id}
     [HttpPut("{id:int}")]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<ProductDto>> Update(
         int id,
         [FromBody] UpdateProductDto updateProductDto)
@@ -99,6 +106,7 @@ public class ProductsController : ControllerBase
 
     // DELETE: api/products/{id}
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(int id)
     {
         var deleted = await _productService.DeleteAsync(id);

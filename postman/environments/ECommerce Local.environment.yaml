@@ -1,0 +1,7 @@
+name: ECommerce Local
+values:
+  - key: baseUrl
+    value: ''
+  - key: token
+    value: ''
+color: 240

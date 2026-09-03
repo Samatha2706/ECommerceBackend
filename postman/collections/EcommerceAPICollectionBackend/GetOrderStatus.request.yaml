@@ -1,0 +1,8 @@
+$kind: http-request
+url: https://localhost:7281/api/Order
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0dat}}"
+order: 4503578273552884

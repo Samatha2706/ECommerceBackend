@@ -7,9 +7,9 @@ body:
   type: json
   content: "{\r
 
-    \  \"productId\": 1,\r
+    \  \"productId\": 2,\r
 
-    \  \"quantity\": 2\r
+    \  \"quantity\": 5\r
 
     }"
 auth:

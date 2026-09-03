@@ -1,6 +1,7 @@
 ﻿using ECommerce.Application.DTOs.Products;
 using ECommerce.Application.Interfaces;
 using ECommerce.Domain.Entities;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace ECommerce.Application.Services;
 
@@ -10,23 +11,37 @@ public class ProductService : IProductService
     private readonly IGenericRepository<Category> _categoryRepository;
     private readonly IGenericRepository<Inventory> _inventoryRepository;
 
+    private readonly IMemoryCache _cache;
+
+
     public ProductService(
         IGenericRepository<Product> productRepository,
         IGenericRepository<Category> categoryRepository,
-        IGenericRepository<Inventory> inventoryRepository)
+        IGenericRepository<Inventory> inventoryRepository,
+        IMemoryCache cache)
     {
         _productRepository = productRepository;
         _categoryRepository = categoryRepository;
         _inventoryRepository = inventoryRepository;
+        _cache = cache;
     }
 
     public async Task<IReadOnlyList<ProductDto>> GetAllAsync()
     {
+        const string cacheKey = "products_all";
+
+        if (_cache.TryGetValue(
+            cacheKey,
+            out IReadOnlyList<ProductDto>? cachedProducts))
+        {
+            return cachedProducts!;
+        }
+
         var products = await _productRepository.GetAllAsync();
         var categories = await _categoryRepository.GetAllAsync();
         var inventories = await _inventoryRepository.GetAllAsync();
 
-        return products
+        var result = products
             .Select(product =>
             {
                 var category = categories.FirstOrDefault(
@@ -38,6 +53,13 @@ public class ProductService : IProductService
                 return MapToDto(product, category, inventory);
             })
             .ToList();
+
+        _cache.Set(
+            cacheKey,
+            result,
+            TimeSpan.FromMinutes(5));
+
+        return result;
     }
 
     public async Task<ProductDto?> GetByIdAsync(int id)
@@ -109,6 +131,8 @@ public class ProductService : IProductService
         await _inventoryRepository.AddAsync(inventory);
         await _inventoryRepository.SaveChangesAsync();
 
+        _cache.Remove("products_all");
+
         return MapToDto(product, category, inventory);
     }
 
@@ -162,6 +186,7 @@ public class ProductService : IProductService
 
         var inventory = inventories.FirstOrDefault(
             i => i.ProductId == product.Id);
+        _cache.Remove("products_all");
 
         return MapToDto(product, category, inventory);
     }
@@ -178,6 +203,7 @@ public class ProductService : IProductService
         _productRepository.Delete(product);
 
         await _productRepository.SaveChangesAsync();
+        _cache.Remove("products_all");
 
         return true;
     }

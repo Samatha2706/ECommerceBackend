@@ -1,0 +1,13 @@
+$kind: http-request
+name: https://localhost:7281/api/Order/admin/1/status
+description: ""
+url: https://localhost:7281/api/Order/admin/1/status
+method: PUT
+body:
+  type: json
+  content: "{\r\n  \"status\": 3\r\n}"
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_15yb}}"
+order: 4503599515610312

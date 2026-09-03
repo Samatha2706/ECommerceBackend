@@ -1,10 +1,13 @@
 ﻿using ECommerce.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace ECommerce.Application.Interfaces;
 
 public interface IApplicationDbContext
 {
+    DatabaseFacade Database { get; }
     DbSet<User> Users { get; }
     DbSet<Category> Categories { get; }
     DbSet<Product> Products { get; }
@@ -17,4 +20,6 @@ public interface IApplicationDbContext
 
     Task<int> SaveChangesAsync(
         CancellationToken cancellationToken = default);
+    Task<IDbContextTransaction> BeginTransactionAsync(
+    CancellationToken cancellationToken = default);
 }

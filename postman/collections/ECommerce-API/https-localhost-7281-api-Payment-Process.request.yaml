@@ -1,0 +1,19 @@
+$kind: http-request
+name: https://localhost:7281/api/Payment/Process
+description: ""
+url: https://localhost:7281/api/Payment/Process
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"orderId\": 1,\r
+
+    \  \"paymentMethod\": \"Mock\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0rks}}"
+order: 4503598853538758

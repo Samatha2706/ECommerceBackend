@@ -1,0 +1,7 @@
+$kind: http-request
+description: ""
+url: https://localhost:7281/api/products
+method: GET
+auth:
+  type: noauth
+order: 1788453133475

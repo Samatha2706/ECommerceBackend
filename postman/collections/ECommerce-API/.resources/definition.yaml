@@ -12,3 +12,15 @@ variables:
   - key: supabase_service_role_api_key_04cu
     secret: true
     disabled: false
+  - key: supabase_service_role_api_key_0rks
+    secret: true
+    disabled: false
+  - key: json_web_token_0rks
+    secret: true
+    disabled: false
+  - key: json_web_token_15yb
+    secret: true
+    disabled: false
+  - key: supabase_service_role_api_key_0bbu
+    secret: true
+    disabled: false
