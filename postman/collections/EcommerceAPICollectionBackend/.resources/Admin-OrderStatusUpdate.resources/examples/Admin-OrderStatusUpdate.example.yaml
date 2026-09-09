@@ -1,0 +1,36 @@
+$kind: http-example
+request:
+  url: https://localhost:7281/api/order/admin/2/status
+  method: PUT
+  body:
+    type: json
+    content: "{\r\n    \"status\":\"Shipped\"\r\n}"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    content-type: application/json; charset=utf-8
+    date: Tue, 08 Sep 2026 14:35:54 GMT
+    server: Kestrel
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+        "id": 2,
+        "userId": 99,
+        "totalAmount": 7497,
+        "shippingAddress": "Renuka Nivas,Malakpet,Hyderabad",
+        "status": "Shipped",
+        "createdAt": "2026-09-03T16:49:06.7207762",
+        "items": [
+          {
+            "productId": 3,
+            "productName": "Wireless Headphones",
+            "quantity": 3,
+            "unitPrice": 2499,
+            "subtotal": 7497
+          }
+        ]
+      }
+order: 1788878168200

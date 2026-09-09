@@ -1,0 +1,9 @@
+$kind: http-request
+url: https://localhost:7281/api/order/admin/2
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{adminToken}}"
+examples: .resources/Admin-GetOrderById(After Updating).resources/examples
+order: 13000

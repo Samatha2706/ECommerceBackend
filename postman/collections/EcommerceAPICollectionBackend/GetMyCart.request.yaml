@@ -6,4 +6,5 @@ auth:
   type: bearer
   credentials:
     token: "{{supabase_service_role_api_key_0dat}}"
-order: 4467602440787010
+examples: .resources/GetMyCart.resources/examples
+order: 3000

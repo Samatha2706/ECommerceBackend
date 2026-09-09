@@ -26,22 +26,101 @@ public class ProductService : IProductService
         _cache = cache;
     }
 
-    public async Task<IReadOnlyList<ProductDto>> GetAllAsync()
+    public async Task<ProductPagedResultDto> GetAllAsync(
+    string? search = null, 
+    int? categoryId = null,
+    decimal? minPrice = null,
+    decimal? maxPrice = null,
+    string? sortBy = null,
+    string? sortOrder = null,
+    int pageNumber = 1,
+    int pageSize = 10)
     {
-        const string cacheKey = "products_all";
-
-        if (_cache.TryGetValue(
-            cacheKey,
-            out IReadOnlyList<ProductDto>? cachedProducts))
-        {
-            return cachedProducts!;
-        }
-
         var products = await _productRepository.GetAllAsync();
         var categories = await _categoryRepository.GetAllAsync();
         var inventories = await _inventoryRepository.GetAllAsync();
 
-        var result = products
+
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            search = search.Trim();
+
+            products = products
+                .Where(product =>
+                    product.Name.Contains(
+                        search,
+                        StringComparison.OrdinalIgnoreCase) ||
+                    (product.Description != null &&
+                     product.Description.Contains(
+                         search,
+                         StringComparison.OrdinalIgnoreCase)))
+                .ToList();
+        }
+
+        if (categoryId.HasValue)
+        {
+            products = products
+                .Where(p => p.CategoryId == categoryId.Value)
+                .ToList();
+        }
+        if (minPrice.HasValue)
+        {
+            products = products
+                .Where(product => product.Price >= minPrice.Value)
+                .ToList();
+        }
+
+        if (maxPrice.HasValue)
+        {
+            products = products
+                .Where(product => product.Price <= maxPrice.Value)
+                .ToList();
+        }
+
+        if (!string.IsNullOrWhiteSpace(sortBy))
+        {
+            sortBy = sortBy.Trim().ToLowerInvariant();
+            sortOrder = sortOrder?.Trim().ToLowerInvariant();
+
+            var descending = sortOrder == "desc";
+
+            products = sortBy switch
+            {
+                "price" => descending
+                    ? products.OrderByDescending(p => p.Price).ToList()
+                    : products.OrderBy(p => p.Price).ToList(),
+
+                "name" => descending
+                    ? products.OrderByDescending(p => p.Name).ToList()
+                    : products.OrderBy(p => p.Name).ToList(),
+
+                _ => products
+            };
+        }
+
+        
+
+        if (pageNumber < 1)
+        {
+            pageNumber = 1;
+        }
+
+        if (pageSize < 1)
+        {
+            pageSize = 10;
+        }
+
+        var totalCount = products.Count;
+
+        var totalPages = (int)Math.Ceiling(
+            totalCount / (double)pageSize);
+
+        var pagedProducts = products
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        var result = pagedProducts
             .Select(product =>
             {
                 var category = categories.FirstOrDefault(
@@ -54,12 +133,14 @@ public class ProductService : IProductService
             })
             .ToList();
 
-        _cache.Set(
-            cacheKey,
-            result,
-            TimeSpan.FromMinutes(5));
-
-        return result;
+        return new ProductPagedResultDto
+        {
+            Products = result,
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+            TotalCount = totalCount,
+            TotalPages = totalPages
+        };
     }
 
     public async Task<ProductDto?> GetByIdAsync(int id)
@@ -222,7 +303,8 @@ public class ProductService : IProductService
             IsActive = product.IsActive,
             CategoryId = product.CategoryId,
             CategoryName = category?.Name ?? string.Empty,
-            AvailableQuantity = inventory?.Quantity ?? 0
+            AvailableQuantity = inventory?.Quantity ?? 0,
+            ReorderLevel = inventory?.ReorderLevel ?? 0
         };
     }
 }

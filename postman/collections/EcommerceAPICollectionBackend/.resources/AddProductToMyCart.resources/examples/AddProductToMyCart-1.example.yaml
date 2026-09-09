@@ -1,0 +1,40 @@
+$kind: http-example
+name: AddProductToMyCart
+request:
+  url: https://localhost:7281/api/Cart/items
+  method: POST
+  body:
+    type: json
+    content: "{\r
+
+      \    \"ProductId\":4,\r
+
+      \    \"Quantity\":1\r
+
+      }"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    content-type: application/json; charset=utf-8
+    date: Tue, 08 Sep 2026 14:17:37 GMT
+    server: Kestrel
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+        "cartId": 13,
+        "items": [
+          {
+            "cartItemId": 3,
+            "productId": 4,
+            "productName": "Smart Watch",
+            "unitPrice": 3999,
+            "quantity": 2,
+            "subtotal": 7998
+          }
+        ],
+        "totalAmount": 7998
+      }
+order: 3427882228323994

@@ -1,0 +1,20 @@
+$kind: http-request
+name: PaymentProcess
+description: ""
+url: https://localhost:7281/api/payment/process
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"OrderId\":3,\r
+
+    \    \"PaymentMethod\":\"UPI\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{customerToken}}"
+examples: .resources/PaymentProcess-1.resources/examples
+order: 4363103857100830

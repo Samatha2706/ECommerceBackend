@@ -1,0 +1,28 @@
+$kind: http-example
+request:
+  url: https://localhost:7281/api/payment/process
+  method: POST
+  body:
+    type: json
+    content: "{\r
+
+      \    \"OrderId\":3,\r
+
+      \    \"PaymentMethod\":\"UPI\"\r
+
+      }"
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    content-type: application/json; charset=utf-8
+    date: Tue, 08 Sep 2026 14:45:07 GMT
+    server: Kestrel
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+        "message": "Payment can only be processed for pending orders."
+      }
+order: 1788878758759

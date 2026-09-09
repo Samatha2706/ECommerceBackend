@@ -1,0 +1,40 @@
+$kind: http-example
+request:
+  url: https://localhost:7281/api/order/checkout
+  method: POST
+  body:
+    type: json
+    content: "{\r
+
+      \    \"ShippingAddress\":\"LB Nagar,Hyderabad\"\r
+
+      }"
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    content-type: application/json; charset=utf-8
+    date: Tue, 08 Sep 2026 14:23:23 GMT
+    server: Kestrel
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+        "id": 3,
+        "userId": 99,
+        "totalAmount": 7998,
+        "shippingAddress": "LB Nagar,Hyderabad",
+        "status": "Pending",
+        "createdAt": "2026-09-08T14:23:24.1583562Z",
+        "items": [
+          {
+            "productId": 4,
+            "productName": "Smart Watch",
+            "quantity": 2,
+            "unitPrice": 3999,
+            "subtotal": 7998
+          }
+        ]
+      }
+order: 1788877414331

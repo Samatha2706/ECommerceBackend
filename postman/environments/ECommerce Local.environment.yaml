@@ -2,6 +2,8 @@ name: ECommerce Local
 values:
   - key: baseUrl
     value: ''
-  - key: token
-    value: ''
+  - key: customerToken
+    secret: true
+  - key: adminToken
+    secret: true
 color: 240

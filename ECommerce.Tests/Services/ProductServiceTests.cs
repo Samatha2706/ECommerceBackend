@@ -80,11 +80,11 @@ public class ProductServiceTests
         var result = await _productService.GetAllAsync();
 
         // Assert
-        Assert.Single(result);
-        Assert.Equal("Laptop", result[0].Name);
-        Assert.Equal("Electronics", result[0].CategoryName);
-        Assert.Equal(10, result[0].AvailableQuantity);
-        Assert.Equal(60000, result[0].Price);
+        Assert.Single(result.Products);
+        Assert.Equal("Laptop", result.Products[0].Name);
+        Assert.Equal("Electronics", result.Products[0].CategoryName);
+        Assert.Equal(10, result.Products[0].AvailableQuantity);
+        Assert.Equal(60000, result.Products[0].Price);
     }
 
     [Fact]
@@ -111,8 +111,8 @@ public class ProductServiceTests
         var result = await _productService.GetAllAsync();
 
         // Assert
-        Assert.Single(result);
-        Assert.Equal("Cached Laptop", result[0].Name);
+        Assert.Single(result.Products);
+        Assert.Equal("Cached Laptop", result.Products[0].Name);
 
         _productRepositoryMock.Verify(
             repository => repository.GetAllAsync(),

@@ -4,7 +4,15 @@ namespace ECommerce.Application.Interfaces;
 
 public interface IProductService
 {
-    Task<IReadOnlyList<ProductDto>> GetAllAsync();
+    Task<ProductPagedResultDto> GetAllAsync(
+        string? search=null,
+        int?categoryId=null,
+        decimal?minPrice=null,
+        decimal?maxPrice=null,
+        string?sortBy=null,
+        string?sortOrder=null,
+        int pageNumber = 1,
+        int pageSize = 10);
 
     Task<ProductDto?> GetByIdAsync(int id);
 

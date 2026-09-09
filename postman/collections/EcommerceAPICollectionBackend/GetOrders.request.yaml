@@ -4,5 +4,6 @@ method: GET
 auth:
   type: bearer
   credentials:
-    token: "{{json_web_token_0dat}}"
-order: 4503578273552884
+    token: "{{customerToken}}"
+examples: .resources/GetOrders.resources/examples
+order: 8000

@@ -1,0 +1,17 @@
+$kind: http-request
+description: ""
+url: https://localhost:7281/api/Auth/register
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"fullName\": \"John Doe\",\r
+
+    \  \"email\": \"john@example.com\",\r
+
+    \  \"password\": \"Password123\"\r
+
+    }"
+examples: .resources/Register.resources/examples
+order: 3148411063769262

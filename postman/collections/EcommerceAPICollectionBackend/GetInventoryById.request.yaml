@@ -1,0 +1,6 @@
+$kind: http-request
+description: ""
+url: https://localhost:7281/api/Inventory/3
+method: GET
+examples: .resources/GetInventoryById.resources/examples
+order: 4408196270196108

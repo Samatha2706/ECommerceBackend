@@ -4,4 +4,5 @@ url: https://localhost:7281/api/products
 method: GET
 auth:
   type: noauth
-order: 1788453133475
+examples: .resources/GetAllProducts.resources/examples
+order: 1000

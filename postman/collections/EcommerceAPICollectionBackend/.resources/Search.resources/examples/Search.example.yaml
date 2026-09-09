@@ -1,0 +1,31 @@
+$kind: http-example
+request:
+  url: https://localhost:7281/api/products?search=yoga
+  method: GET
+  queryParams:
+    search: yoga
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    content-type: application/json; charset=utf-8
+    date: Tue, 08 Sep 2026 09:23:11 GMT
+    server: Kestrel
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "id": 16,
+          "name": "Yoga Mat",
+          "description": "Non-slip exercise and yoga mat",
+          "price": 999,
+          "isActive": true,
+          "categoryId": 7,
+          "categoryName": "Sports",
+          "availableQuantity": 1,
+          "reorderLevel": 5
+        }
+      ]
+order: 1788859395234

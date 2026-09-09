@@ -1,0 +1,78 @@
+$kind: http-example
+request:
+  url: https://localhost:7281/api/products?wireless&categoryId=1&minPrice=500&maxPrice=3000
+  method: GET
+  queryParams:
+    wireless: null
+    categoryId: "1"
+    minPrice: "500"
+    maxPrice: "3000"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    content-type: application/json; charset=utf-8
+    date: Tue, 08 Sep 2026 09:28:33 GMT
+    server: Kestrel
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "id": 3,
+          "name": "Wireless Headphones",
+          "description": "Bluetooth over-ear wireless headphones",
+          "price": 2499,
+          "isActive": true,
+          "categoryId": 1,
+          "categoryName": "Electronics & Gadgets",
+          "availableQuantity": 22,
+          "reorderLevel": 5
+        },
+        {
+          "id": 5,
+          "name": "Mechanical Keyboard",
+          "description": "RGB mechanical keyboard for computers",
+          "price": 2999,
+          "isActive": true,
+          "categoryId": 1,
+          "categoryName": "Electronics & Gadgets",
+          "availableQuantity": 3,
+          "reorderLevel": 5
+        },
+        {
+          "id": 6,
+          "name": "Wireless Mouse",
+          "description": "Ergonomic wireless mouse",
+          "price": 1299,
+          "isActive": true,
+          "categoryId": 1,
+          "categoryName": "Electronics & Gadgets",
+          "availableQuantity": 20,
+          "reorderLevel": 5
+        },
+        {
+          "id": 18,
+          "name": "Wireless Speaker",
+          "description": "Portable Bluetooth speaker",
+          "price": 2499,
+          "isActive": true,
+          "categoryId": 1,
+          "categoryName": "Electronics & Gadgets",
+          "availableQuantity": 20,
+          "reorderLevel": 5
+        },
+        {
+          "id": 19,
+          "name": "Laptop Stand",
+          "description": "Adjustable aluminum laptop stand",
+          "price": 1499,
+          "isActive": true,
+          "categoryId": 1,
+          "categoryName": "Electronics & Gadgets",
+          "availableQuantity": 15,
+          "reorderLevel": 5
+        }
+      ]
+order: 1788859716576

@@ -1,0 +1,32 @@
+$kind: http-example
+request:
+  url: https://localhost:7281/api/auth/login
+  method: POST
+  body:
+    type: json
+    content: "{\r
+
+      \  \"email\": \"alex@gmail.com\",\r
+
+      \  \"password\": \"343456\"\r
+
+      }"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    content-type: application/json; charset=utf-8
+    date: Tue, 08 Sep 2026 14:00:08 GMT
+    server: Kestrel
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+        "userId": 99,
+        "fullName": "Alex",
+        "email": "alex@gmail.com",
+        "role": "Customer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5OSIsImVtYWlsIjoiYWxleEBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6Ijk5IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiYWxleEBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJDdXN0b21lciIsImV4cCI6MTc4ODg3OTYwOSwiaXNzIjoiRUNvbW1lcmNlQXBpIiwiYXVkIjoiRUNvbW1lcmNlQ2xpZW50In0.hSdZi03PsJhNJEJfpCe1OnfvURHo7TvBlqek8XdXyWI"
+      }
+order: 1788876011735

@@ -1,0 +1,9 @@
+$kind: http-request
+description: ""
+url: https://localhost:7281/api/products?sortBy=price&sortOrder=asc
+method: GET
+queryParams:
+  sortBy: price
+  sortOrder: asc
+examples: .resources/Sort.resources/examples
+order: 19000

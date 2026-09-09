@@ -5,5 +5,6 @@ method: GET
 auth:
   type: bearer
   credentials:
-    token: "{{json_web_token_0dat}}"
-order: 4501969269159702
+    token: "{{customerToken}}"
+examples: .resources/GetMyCartAfterAddingProduct.resources/examples
+order: 5000

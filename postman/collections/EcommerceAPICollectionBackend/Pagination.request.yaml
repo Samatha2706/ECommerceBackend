@@ -1,0 +1,6 @@
+$kind: http-request
+description: ""
+url: https://localhost:7281/api/products
+method: GET
+examples: .resources/Pagination.resources/examples
+order: 20000

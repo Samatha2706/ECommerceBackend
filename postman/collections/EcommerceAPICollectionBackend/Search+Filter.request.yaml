@@ -1,0 +1,11 @@
+$kind: http-request
+description: ""
+url: https://localhost:7281/api/products?wireless&categoryId=1&minPrice=500&maxPrice=3000
+method: GET
+queryParams:
+  wireless: null
+  categoryId: "1"
+  minPrice: "500"
+  maxPrice: "3000"
+examples: .resources/Search+Filter.resources/examples
+order: 18000

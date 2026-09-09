@@ -1,0 +1,45 @@
+$kind: http-example
+request:
+  url: https://localhost:7281/api/Inventory/low-stock
+  method: GET
+  body:
+    type: json
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    content-type: application/json; charset=utf-8
+    date: Tue, 08 Sep 2026 14:51:28 GMT
+    server: Kestrel
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "id": 1,
+          "productId": 1,
+          "productName": "Updated Product",
+          "quantity": 0,
+          "reorderLevel": 5,
+          "isLowStock": true
+        },
+        {
+          "id": 5,
+          "productId": 5,
+          "productName": "Mechanical Keyboard",
+          "quantity": 3,
+          "reorderLevel": 5,
+          "isLowStock": true
+        },
+        {
+          "id": 16,
+          "productId": 16,
+          "productName": "Yoga Mat",
+          "quantity": 1,
+          "reorderLevel": 5,
+          "isLowStock": true
+        }
+      ]
+order: 1373013686638660

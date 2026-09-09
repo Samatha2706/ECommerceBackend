@@ -1,0 +1,8 @@
+$kind: http-request
+description: ""
+url: https://localhost:7281/api/products?categoryId=1
+method: GET
+queryParams:
+  categoryId: "1"
+examples: .resources/Filter.resources/examples
+order: 17000

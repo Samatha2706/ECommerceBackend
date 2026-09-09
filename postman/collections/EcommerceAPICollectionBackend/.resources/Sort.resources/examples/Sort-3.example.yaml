@@ -1,0 +1,253 @@
+$kind: http-example
+name: Sort
+request:
+  url: https://localhost:7281/api/products?sortBy=name&sortOrder=desc
+  method: GET
+  queryParams:
+    sortBy: name
+    sortOrder: desc
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    content-type: application/json; charset=utf-8
+    date: Tue, 08 Sep 2026 09:49:08 GMT
+    server: Kestrel
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "id": 16,
+          "name": "Yoga Mat",
+          "description": "Non-slip exercise and yoga mat",
+          "price": 999,
+          "isActive": true,
+          "categoryId": 7,
+          "categoryName": "Sports",
+          "availableQuantity": 1,
+          "reorderLevel": 5
+        },
+        {
+          "id": 18,
+          "name": "Wireless Speaker",
+          "description": "Portable Bluetooth speaker",
+          "price": 2499,
+          "isActive": true,
+          "categoryId": 1,
+          "categoryName": "Electronics & Gadgets",
+          "availableQuantity": 20,
+          "reorderLevel": 5
+        },
+        {
+          "id": 6,
+          "name": "Wireless Mouse",
+          "description": "Ergonomic wireless mouse",
+          "price": 1299,
+          "isActive": true,
+          "categoryId": 1,
+          "categoryName": "Electronics & Gadgets",
+          "availableQuantity": 20,
+          "reorderLevel": 5
+        },
+        {
+          "id": 3,
+          "name": "Wireless Headphones",
+          "description": "Bluetooth over-ear wireless headphones",
+          "price": 2499,
+          "isActive": true,
+          "categoryId": 1,
+          "categoryName": "Electronics & Gadgets",
+          "availableQuantity": 22,
+          "reorderLevel": 5
+        },
+        {
+          "id": 1,
+          "name": "Updated Product",
+          "description": "Updated",
+          "price": 150,
+          "isActive": true,
+          "categoryId": 1,
+          "categoryName": "Electronics & Gadgets",
+          "availableQuantity": 0,
+          "reorderLevel": 5
+        },
+        {
+          "id": 20,
+          "name": "Story Book",
+          "description": "Interesting Moral Stories for children",
+          "price": 899,
+          "isActive": true,
+          "categoryId": 5,
+          "categoryName": "Books",
+          "availableQuantity": 10,
+          "reorderLevel": 3
+        },
+        {
+          "id": 14,
+          "name": "Stainless Steel Water Bottle",
+          "description": "Insulated stainless steel water bottle",
+          "price": 899,
+          "isActive": true,
+          "categoryId": 6,
+          "categoryName": "Home & Kitchen",
+          "availableQuantity": 20,
+          "reorderLevel": 5
+        },
+        {
+          "id": 21,
+          "name": "Sports Bottle",
+          "description": "Insulated water bottle",
+          "price": 799,
+          "isActive": true,
+          "categoryId": 7,
+          "categoryName": "Sports",
+          "availableQuantity": 25,
+          "reorderLevel": 5
+        },
+        {
+          "id": 4,
+          "name": "Smart Watch",
+          "description": "Fitness tracking smart watch",
+          "price": 3999,
+          "isActive": true,
+          "categoryId": 1,
+          "categoryName": "Electronics & Gadgets",
+          "availableQuantity": 15,
+          "reorderLevel": 5
+        },
+        {
+          "id": 8,
+          "name": "Slim Fit Jeans",
+          "description": "Classic slim-fit denim jeans",
+          "price": 1799,
+          "isActive": true,
+          "categoryId": 4,
+          "categoryName": "Clothing",
+          "availableQuantity": 18,
+          "reorderLevel": 5
+        },
+        {
+          "id": 9,
+          "name": "Running Shoes",
+          "description": "Lightweight running shoes",
+          "price": 2499,
+          "isActive": true,
+          "categoryId": 4,
+          "categoryName": "Clothing",
+          "availableQuantity": 12,
+          "reorderLevel": 5
+        },
+        {
+          "id": 5,
+          "name": "Mechanical Keyboard",
+          "description": "RGB mechanical keyboard for computers",
+          "price": 2999,
+          "isActive": true,
+          "categoryId": 1,
+          "categoryName": "Electronics & Gadgets",
+          "availableQuantity": 3,
+          "reorderLevel": 5
+        },
+        {
+          "id": 19,
+          "name": "Laptop Stand",
+          "description": "Adjustable aluminum laptop stand",
+          "price": 1499,
+          "isActive": true,
+          "categoryId": 1,
+          "categoryName": "Electronics & Gadgets",
+          "availableQuantity": 15,
+          "reorderLevel": 5
+        },
+        {
+          "id": 15,
+          "name": "Kitchen Storage Set",
+          "description": "Reusable containers for kitchen storage",
+          "price": 1299,
+          "isActive": true,
+          "categoryId": 6,
+          "categoryName": "Home & Kitchen",
+          "availableQuantity": 9,
+          "reorderLevel": 3
+        },
+        {
+          "id": 2,
+          "name": "Integration Test Product",
+          "description": "Test product",
+          "price": 100,
+          "isActive": true,
+          "categoryId": 1,
+          "categoryName": "Electronics & Gadgets",
+          "availableQuantity": 10,
+          "reorderLevel": 2
+        },
+        {
+          "id": 17,
+          "name": "Gym Backpack",
+          "description": "Durable backpack for gym and sports",
+          "price": 1599,
+          "isActive": true,
+          "categoryId": 7,
+          "categoryName": "Sports",
+          "availableQuantity": 14,
+          "reorderLevel": 5
+        },
+        {
+          "id": 7,
+          "name": "Cotton T-Shirt",
+          "description": "Comfortable regular-fit cotton T-shirt",
+          "price": 799,
+          "isActive": true,
+          "categoryId": 4,
+          "categoryName": "Clothing",
+          "availableQuantity": 30,
+          "reorderLevel": 5
+        },
+        {
+          "id": 13,
+          "name": "Coffee Maker",
+          "description": "Automatic coffee maker for home",
+          "price": 3499,
+          "isActive": true,
+          "categoryId": 6,
+          "categoryName": "Home & Kitchen",
+          "availableQuantity": 7,
+          "reorderLevel": 3
+        },
+        {
+          "id": 10,
+          "name": "Clean Code",
+          "description": "A practical guide to writing clean software",
+          "price": 699,
+          "isActive": true,
+          "categoryId": 5,
+          "categoryName": "Books",
+          "availableQuantity": 10,
+          "reorderLevel": 3
+        },
+        {
+          "id": 11,
+          "name": "C# Programming Guide",
+          "description": "Programming fundamentals and C# concepts",
+          "price": 899,
+          "isActive": true,
+          "categoryId": 5,
+          "categoryName": "Books",
+          "availableQuantity": 8,
+          "reorderLevel": 3
+        },
+        {
+          "id": 12,
+          "name": "ASP.NET Core Development",
+          "description": "Guide to building modern web applications",
+          "price": 1099,
+          "isActive": true,
+          "categoryId": 5,
+          "categoryName": "Books",
+          "availableQuantity": 6,
+          "reorderLevel": 3
+        }
+      ]
+order: 2989839422399670

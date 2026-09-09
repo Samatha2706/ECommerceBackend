@@ -148,12 +148,6 @@ public class ECommerceDbContext : DbContext, IApplicationDbContext
 {
     new Category
     {
-        Id = 3,
-        Name = "Electronics",
-        Description = "Electronic devices and accessories"
-    },
-    new Category
-    {
         Id = 4,
         Name = "Clothing",
         Description = "Clothing and fashion products"
@@ -189,7 +183,7 @@ public class ECommerceDbContext : DbContext, IApplicationDbContext
         Description = "Bluetooth over-ear wireless headphones",
         Price = 2499.00m,
         IsActive = true,
-        CategoryId = 3
+        CategoryId = 1
     },
     new Product
     {
@@ -198,7 +192,7 @@ public class ECommerceDbContext : DbContext, IApplicationDbContext
         Description = "Fitness tracking smart watch",
         Price = 3999.00m,
         IsActive = true,
-        CategoryId = 3
+        CategoryId = 1
     },
     new Product
     {
@@ -207,7 +201,7 @@ public class ECommerceDbContext : DbContext, IApplicationDbContext
         Description = "RGB mechanical keyboard for computers",
         Price = 2999.00m,
         IsActive = true,
-        CategoryId = 3
+        CategoryId = 1
     },
     new Product
     {
@@ -216,7 +210,7 @@ public class ECommerceDbContext : DbContext, IApplicationDbContext
         Description = "Ergonomic wireless mouse",
         Price = 1299.00m,
         IsActive = true,
-        CategoryId = 3
+        CategoryId = 1
     },
 
     new Product

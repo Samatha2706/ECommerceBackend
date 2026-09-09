@@ -1,4 +1,16 @@
 $kind: http-request
-url: ""
-method: GET
-order: 4503573901965932
+url: https://localhost:7281/api/order/checkout
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"ShippingAddress\":\"LB Nagar,Hyderabad\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{customerToken}}"
+examples: .resources/OrderCheckout.resources/examples
+order: 7000

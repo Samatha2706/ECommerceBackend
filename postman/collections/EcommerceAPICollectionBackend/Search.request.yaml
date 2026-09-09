@@ -1,0 +1,8 @@
+$kind: http-request
+description: ""
+url: https://localhost:7281/api/products?search=yoga
+method: GET
+queryParams:
+  search: yoga
+examples: .resources/Search.resources/examples
+order: 16000

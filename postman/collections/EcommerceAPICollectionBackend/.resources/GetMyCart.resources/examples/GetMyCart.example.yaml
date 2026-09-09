@@ -1,0 +1,21 @@
+$kind: http-example
+request:
+  url: https://localhost:7281/api/cart
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    content-type: application/json; charset=utf-8
+    date: Tue, 08 Sep 2026 14:09:58 GMT
+    server: Kestrel
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+        "cartId": 13,
+        "items": [],
+        "totalAmount": 0
+      }
+order: 1788876605211

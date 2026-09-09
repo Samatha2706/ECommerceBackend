@@ -1,0 +1,10 @@
+$kind: http-request
+description: ""
+url: https://localhost:7281/api/products/bulk-upload/template
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{supabase_service_role_api_key_03hq}}"
+examples: .resources/Admin-BulkUploadTemplateDownload.resources/examples
+order: 15000

@@ -1,4 +1,18 @@
 $kind: http-request
-url: ""
-method: GET
-order: 4503543861230015
+url: https://localhost:7281/api/cart/items/3
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \    \"ProductId\":4,\r
+
+    \    \"Quantity\":2\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{customerToken}}"
+examples: .resources/UpdateCart.resources/examples
+order: 6000

@@ -10,4 +10,5 @@ body:
     \  \"password\": \"343456\"\r
 
     }"
-order: 4503438653673916
+examples: .resources/LoginCustomer.resources/examples
+order: 21000

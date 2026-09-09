@@ -1,0 +1,19 @@
+$kind: http-request
+description: ""
+url: https://localhost:7281/api/products/bulk-upload
+method: POST
+body:
+  type: formdata
+  content:
+    - type: file
+      key: file
+      src:
+        - /C:/Users/SomidiSamatha/Documents/ECommerceBackend-BulkUpload/Products(Test
+          Data).xlsx
+      description: Uploading bulk products
+      disabled: false
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0rso}}"
+order: 14000

@@ -94,12 +94,6 @@ namespace ECommerce.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 3,
-                            Description = "Electronic devices and accessories",
-                            Name = "Electronics"
-                        },
-                        new
-                        {
                             Id = 4,
                             Description = "Clothing and fashion products",
                             Name = "Clothing"
@@ -391,7 +385,7 @@ namespace ECommerce.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CategoryId = 3,
+                            CategoryId = 1,
                             Description = "Bluetooth over-ear wireless headphones",
                             IsActive = true,
                             Name = "Wireless Headphones",
@@ -400,7 +394,7 @@ namespace ECommerce.Infrastructure.Migrations
                         new
                         {
                             Id = 4,
-                            CategoryId = 3,
+                            CategoryId = 1,
                             Description = "Fitness tracking smart watch",
                             IsActive = true,
                             Name = "Smart Watch",
@@ -409,7 +403,7 @@ namespace ECommerce.Infrastructure.Migrations
                         new
                         {
                             Id = 5,
-                            CategoryId = 3,
+                            CategoryId = 1,
                             Description = "RGB mechanical keyboard for computers",
                             IsActive = true,
                             Name = "Mechanical Keyboard",
@@ -418,7 +412,7 @@ namespace ECommerce.Infrastructure.Migrations
                         new
                         {
                             Id = 6,
-                            CategoryId = 3,
+                            CategoryId = 1,
                             Description = "Ergonomic wireless mouse",
                             IsActive = true,
                             Name = "Wireless Mouse",

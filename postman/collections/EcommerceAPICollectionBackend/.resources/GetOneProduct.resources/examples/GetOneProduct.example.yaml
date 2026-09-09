@@ -1,0 +1,27 @@
+$kind: http-example
+request:
+  url: https://localhost:7281/api/products/4
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    content-type: application/json; charset=utf-8
+    date: Tue, 08 Sep 2026 14:03:41 GMT
+    server: Kestrel
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+        "id": 4,
+        "name": "Smart Watch",
+        "description": "Fitness tracking smart watch",
+        "price": 3999,
+        "isActive": true,
+        "categoryId": 1,
+        "categoryName": "Electronics & Gadgets",
+        "availableQuantity": 15,
+        "reorderLevel": 5
+      }
+order: 1788876224103

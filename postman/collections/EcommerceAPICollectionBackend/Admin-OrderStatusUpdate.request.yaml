@@ -1,0 +1,12 @@
+$kind: http-request
+url: https://localhost:7281/api/order/admin/2/status
+method: PUT
+body:
+  type: json
+  content: "{\r\n    \"status\":\"Shipped\"\r\n}"
+auth:
+  type: bearer
+  credentials:
+    token: "{{adminToken}}"
+examples: .resources/Admin-OrderStatusUpdate.resources/examples
+order: 12000
