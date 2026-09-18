@@ -8,12 +8,12 @@ body:
     - type: file
       key: file
       src:
-        - /C:/Users/SomidiSamatha/Documents/ECommerceBackend-BulkUpload/Products(Test
-          Data).xlsx
+        - /C:/Users/SomidiSamatha/Documents/ECommerceBackend-BulkUpload/BulkProductsTemplate2.xlsx
       description: Uploading bulk products
       disabled: false
 auth:
   type: bearer
   credentials:
-    token: "{{json_web_token_0rso}}"
+    token: "{{adminToken}}"
+examples: .resources/Admin-BulkUpload.resources/examples
 order: 14000

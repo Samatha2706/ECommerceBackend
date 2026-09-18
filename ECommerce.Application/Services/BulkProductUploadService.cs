@@ -31,6 +31,8 @@ public class BulkProductUploadService : IBulkProductUploadService
     public async Task<BulkProductUploadResultDto> UploadAsync(
     Stream fileStream)
     {
+        const int batchSize = 3;
+
         using var workbook = new XLWorkbook(fileStream);
 
         var worksheet = workbook.Worksheets.FirstOrDefault();
@@ -41,14 +43,15 @@ public class BulkProductUploadService : IBulkProductUploadService
                 "The Excel file does not contain a worksheet.");
         }
         var expectedHeaders = new[]
-{
-    "Name",
-    "Description",
-    "Price",
-    "CategoryId",
-    "InitialQuantity",
-    "ReorderLevel"
-};
+        {
+            "SKU",
+            "Name",
+            "Description",
+            "Price",
+            "CategoryId",
+            "InitialQuantity",
+            "ReorderLevel"
+        };
 
         for (int column = 1; column <= expectedHeaders.Length; column++)
         {
@@ -76,37 +79,60 @@ public class BulkProductUploadService : IBulkProductUploadService
 
         var result = new BulkProductUploadResultDto
         {
-            TotalRows = lastRow - 1
+            TotalRecords = lastRow - 1,
+            BatchSize = batchSize,
         };
 
-        var products = new List<Product>();
-        var inventories = new List<Inventory>();
+        var newProducts = new List<Product>();
+        var newInventories = new List<Inventory>();
+
+        var updates = new List<(Product Product, int CategoryId, string Name, string
+            ? Description, decimal Price, int Quantity, int ReorderLevel)
+            >();
+
         var errors = new List<string>();
 
         var existingProducts = await _productRepository.GetAllAsync();
         var categories = await _categoryRepository.GetAllAsync();
 
-        var existingProductNames = existingProducts
-            .Select(p => p.Name.Trim())
-            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var existingProductsBySku = existingProducts
+    .Where(p => !string.IsNullOrWhiteSpace(p.SKU))
+    .ToDictionary(
+        p => p.SKU,
+        StringComparer.OrdinalIgnoreCase);
 
-        var excelProductNames = new HashSet<string>(
+        var excelSkus = new HashSet<string>(
             StringComparer.OrdinalIgnoreCase);
+
+        var nextSkuNumber = existingProducts
+            .Select(p => p.SKU)
+            .Where(sku => sku.StartsWith("PROD-"))
+            .Select(sku =>
+                int.TryParse(sku.Substring(5), out var number)
+                    ? number
+                    : 0)
+            .DefaultIfEmpty(0)
+            .Max() + 1;
+
 
         for (int row = 2; row <= lastRow; row++)
         {
-            var name = worksheet.Cell(row, 1)
+            var sku = worksheet.Cell(row, 1)
                 .GetString()
                 .Trim();
 
-            var description = worksheet.Cell(row, 2)
+            var name = worksheet.Cell(row, 2)
                 .GetString()
                 .Trim();
 
-            var priceCell = worksheet.Cell(row, 3);
-            var categoryCell = worksheet.Cell(row, 4);
-            var quantityCell = worksheet.Cell(row, 5);
-            var reorderLevelCell = worksheet.Cell(row, 6);
+            var description = worksheet.Cell(row, 3)
+                .GetString()
+                .Trim();
+
+            var priceCell = worksheet.Cell(row, 4);
+            var categoryCell = worksheet.Cell(row, 5);
+            var quantityCell = worksheet.Cell(row, 6);
+            var reorderLevelCell = worksheet.Cell(row, 7);
 
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -157,22 +183,42 @@ public class BulkProductUploadService : IBulkProductUploadService
                 continue;
             }
 
-            if (existingProductNames.Contains(name))
+            // If SKU is provided, check whether the product already exists
+            if (!string.IsNullOrWhiteSpace(sku))
             {
-                errors.Add(
-                    $"Row {row}: A product named '{name}' already exists.");
-                continue;
+                if (!excelSkus.Add(sku))
+                {
+                    errors.Add(
+                        $"Row {row}: Duplicate SKU '{sku}' in Excel file.");
+                    continue;
+                }
+
+                if (existingProductsBySku.TryGetValue(sku, out var existingProduct))
+                {
+                    updates.Add((
+                        existingProduct,
+                        categoryId,
+                        name,
+                        string.IsNullOrWhiteSpace(description)
+                            ? null
+                            : description,
+                        price,
+                        initialQuantity,
+                        reorderLevel
+                    ));
+
+                    continue;
+                }
             }
 
-            if (!excelProductNames.Add(name))
-            {
-                errors.Add(
-                    $"Row {row}: Duplicate product name '{name}' in Excel file.");
-                continue;
-            }
+            // Blank SKU OR new SKU → create new product
+            var generatedSku = string.IsNullOrWhiteSpace(sku)
+                ? $"PROD-{nextSkuNumber++:D3}"
+                : sku;
 
             var product = new Product
             {
+                SKU = generatedSku,
                 Name = name,
                 Description = string.IsNullOrWhiteSpace(description)
                     ? null
@@ -182,7 +228,7 @@ public class BulkProductUploadService : IBulkProductUploadService
                 IsActive = true
             };
 
-            products.Add(product);
+            newProducts.Add(product);
 
             var inventory = new Inventory
             {
@@ -191,47 +237,89 @@ public class BulkProductUploadService : IBulkProductUploadService
                 ReorderLevel = reorderLevel
             };
 
-            inventories.Add(inventory);
+            newInventories.Add(inventory);
+
         }
 
-        if (errors.Count > 0)
-        {
-            result.FailedRows = errors.Count;
-            result.Errors = errors;
+        result.FailedRecords = errors.Count;
+        result.Errors = errors;
 
-            return result;
-        }
-
-        result.ImportedRows = products.Count;
-
-        if (products.Count == 0)
+        if (newProducts.Count == 0 &&
+    updates.Count == 0)
         {
             return result;
         }
 
-        var executionStrategy = _context.Database
-            .CreateExecutionStrategy();
+        var successfulRecords = 0;
+        var batchesProcessed = 0;
 
-        await executionStrategy.ExecuteAsync(async () =>
+        // Process existing products in batches
+        for (int i = 0; i < updates.Count; i += batchSize)
         {
-            await using var transaction =
-                await _context.Database.BeginTransactionAsync();
+            var updateBatch = updates
+                .Skip(i)
+                .Take(batchSize)
+                .ToList();
+
+            var batchNumber = batchesProcessed + 1;
+
+            var executionStrategy = _context.Database
+                .CreateExecutionStrategy();
 
             try
             {
-                await _productRepository.AddRangeAsync(products);
-                await _inventoryRepository.AddRangeAsync(inventories);
+                await executionStrategy.ExecuteAsync(async () =>
+                {
+                    await using var transaction =
+                        await _context.Database.BeginTransactionAsync();
 
-                await _context.SaveChangesAsync();
+                    try
+                    {
+                        foreach (var update in updateBatch)
+                        {
+                            var product = update.Product;
 
-                await transaction.CommitAsync();
+                            product.Name = update.Name;
+                            product.Description = update.Description;
+                            product.Price = update.Price;
+                            product.CategoryId = update.CategoryId;
+
+                            var inventory = await _context.Inventories
+                                .FirstOrDefaultAsync(i =>
+                                    i.ProductId == product.Id);
+
+                            if (inventory is not null)
+                            {
+                                inventory.Quantity = update.Quantity;
+                                inventory.ReorderLevel = update.ReorderLevel;
+                            }
+                        }
+
+                        await _context.SaveChangesAsync();
+
+                        await transaction.CommitAsync();
+                    }
+                    catch
+                    {
+                        await transaction.RollbackAsync();
+                        throw;
+                    }
+                });
+
+                successfulRecords += updateBatch.Count;
+                batchesProcessed++;
             }
-            catch
+            catch (Exception ex)
             {
-                await transaction.RollbackAsync();
-                throw;
+                errors.Add(
+                    $"Batch {batchNumber} failed: {ex.Message}");
             }
-        });
+        }
+
+        result.SuccessfulRecords = successfulRecords;
+        result.BatchesProcessed = batchesProcessed;
+        result.FailedRecords = result.TotalRecords - result.SuccessfulRecords;
+        result.Errors = errors;
 
         _cache.Remove("products_all");
 
@@ -243,22 +331,20 @@ public class BulkProductUploadService : IBulkProductUploadService
 
         var worksheet = workbook.Worksheets.Add("Products");
 
-        worksheet.Cell(1, 1).Value = "Name";
-        worksheet.Cell(1, 2).Value = "Description";
-        worksheet.Cell(1, 3).Value = "Price";
-        worksheet.Cell(1, 4).Value = "CategoryId";
-        worksheet.Cell(1, 5).Value = "InitialQuantity";
-        worksheet.Cell(1, 6).Value = "ReorderLevel";
-
-        worksheet.Row(1).Style.Font.Bold = true;
-
-        worksheet.Columns().AdjustToContents();
+        worksheet.Cell(1, 1).Value = "SKU";
+        worksheet.Cell(1, 2).Value = "Name";
+        worksheet.Cell(1, 3).Value = "Description";
+        worksheet.Cell(1, 4).Value = "Price";
+        worksheet.Cell(1, 5).Value = "CategoryId";
+        worksheet.Cell(1, 6).Value = "InitialQuantity";
+        worksheet.Cell(1, 7).Value = "ReorderLevel";
 
         using var stream = new MemoryStream();
 
         workbook.SaveAs(stream);
 
         return stream.ToArray();
+
     }
 
 }

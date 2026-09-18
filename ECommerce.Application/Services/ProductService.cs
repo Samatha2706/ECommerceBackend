@@ -164,7 +164,7 @@ public class ProductService : IProductService
     }
 
     public async Task<ProductDto> CreateAsync(
-        CreateProductDto createProductDto)
+    CreateProductDto createProductDto)
     {
         var name = createProductDto.Name.Trim();
 
@@ -179,19 +179,22 @@ public class ProductService : IProductService
 
         var products = await _productRepository.GetAllAsync();
 
-        var productNameExists = products.Any(product =>
-            product.Name.Equals(
-                name,
-                StringComparison.OrdinalIgnoreCase));
+        // Generate the next SKU
+        var nextNumber = products
+            .Select(p => p.SKU)
+            .Where(sku => sku.StartsWith("PROD-"))
+            .Select(sku =>
+                int.TryParse(sku.Substring(5), out var number)
+                    ? number
+                    : 0)
+            .DefaultIfEmpty(0)
+            .Max() + 1;
 
-        if (productNameExists)
-        {
-            throw new InvalidOperationException(
-                "A product with this name already exists.");
-        }
+        var sku = $"PROD-{nextNumber:D3}";
 
         var product = new Product
         {
+            SKU = sku,
             Name = name,
             Description = createProductDto.Description?.Trim(),
             Price = createProductDto.Price,
@@ -297,6 +300,7 @@ public class ProductService : IProductService
         return new ProductDto
         {
             Id = product.Id,
+            SKU = product.SKU,
             Name = product.Name,
             Description = product.Description,
             Price = product.Price,

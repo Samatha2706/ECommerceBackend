@@ -21,3 +21,6 @@ variables:
   - key: supabase_service_role_api_key_03hq
     secret: true
     disabled: false
+  - key: supabase_service_role_api_key_1721
+    secret: true
+    disabled: false

@@ -1,0 +1,9 @@
+$kind: http-request
+url: https://localhost:7281/api/categories
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{customerToken}}"
+examples: .resources/Categories.resources/examples
+order: 4499026858598271

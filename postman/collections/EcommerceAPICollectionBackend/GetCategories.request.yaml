@@ -1,0 +1,18 @@
+$kind: http-request
+description: ""
+url: https://localhost:7281/api/categories
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"Name\":\"Beauty and Personel Care\",\r
+
+    \    \"description\":\"Personal care, skincare, haircare and beauty products.\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{supabase_service_role_api_key_1721}}"
+order: 4503145769388046

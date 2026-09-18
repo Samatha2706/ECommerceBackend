@@ -1,0 +1,33 @@
+$kind: http-example
+request:
+  url: https://localhost:7281/api/products/bulk-upload
+  method: POST
+  body:
+    type: formdata
+    content:
+      - type: file
+        key: file
+        src:
+          - /C:/Users/SomidiSamatha/Documents/ECommerceBackend-BulkUpload/BulkProductsTemplate2.xlsx
+        description: Uploading bulk products
+        disabled: false
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    content-type: application/json; charset=utf-8
+    date: Fri, 11 Sep 2026 09:14:15 GMT
+    server: Kestrel
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+        "totalRecords": 10,
+        "successfulRecords": 10,
+        "failedRecords": 0,
+        "batchSize": 3,
+        "batchesProcessed": 4,
+        "errors": []
+      }
+order: 1789118061262

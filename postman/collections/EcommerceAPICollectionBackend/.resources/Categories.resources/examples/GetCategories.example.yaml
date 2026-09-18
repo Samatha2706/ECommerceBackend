@@ -1,0 +1,43 @@
+$kind: http-example
+request:
+  url: https://localhost:7281/api/categories
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    content-type: application/json; charset=utf-8
+    date: Thu, 10 Sep 2026 06:18:37 GMT
+    server: Kestrel
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "id": 1,
+          "name": "Electronics & Gadgets",
+          "description": "Electronic devices, gadgets and accessories"
+        },
+        {
+          "id": 4,
+          "name": "Clothing",
+          "description": "Clothing and fashion products"
+        },
+        {
+          "id": 5,
+          "name": "Books",
+          "description": "Books and learning materials"
+        },
+        {
+          "id": 6,
+          "name": "Home & Kitchen",
+          "description": "Products for home and kitchen"
+        },
+        {
+          "id": 7,
+          "name": "Sports",
+          "description": "Sports and fitness products"
+        }
+      ]
+order: 1789021133990

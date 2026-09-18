@@ -49,6 +49,13 @@ public class ECommerceDbContext : DbContext, IApplicationDbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
+            entity.Property(p => p.SKU)
+       .IsRequired()
+       .HasMaxLength(50);
+
+            entity.HasIndex(p => p.SKU)
+                .IsUnique();
+
             entity.Property(product => product.Name).HasMaxLength(150).IsRequired();
             entity.Property(product => product.Price).HasPrecision(18, 2);
 
