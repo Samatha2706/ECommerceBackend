@@ -361,3 +361,15 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+# Local application settings (may contain credentials)
+**/appsettings.Development.json
+**/appsettings.json
+**/.env
+**/.env.*
+!**/.env.example
+
+# Container backup files
+*.bak
+
+# Generated container image archives
+*.tar

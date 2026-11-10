@@ -1,0 +1,30 @@
+$kind: http-example
+request:
+  url: https://localhost:7026/api/auth/register
+  method: POST
+  body:
+    type: json
+    content: "{\r
+
+      \  \"fullName\":\"John Stanley\",\r
+
+      \  \"email\": \"john@example.com\",\r
+
+      \  \"password\": \"Password123\"\r
+
+      }"
+response:
+  statusCode: 409
+  statusText: Conflict
+  headers:
+    content-type: application/json; charset=utf-8
+    date: Sun, 27 Sep 2026 06:38:43 GMT
+    server: Kestrel
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+        "message": "A user with this email already exists."
+      }
+order: 1790491175346

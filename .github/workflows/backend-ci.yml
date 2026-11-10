@@ -1,0 +1,28 @@
+name: Backend CI
+
+on:
+  push:
+    branches:
+      - capstone-3-microservices
+  pull_request:
+    branches:
+      - capstone-3-microservices
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore ECommerceBackend.slnx
+
+      - name: Build solution
+        run: dotnet build ECommerceBackend.slnx --configuration Release --no-restore

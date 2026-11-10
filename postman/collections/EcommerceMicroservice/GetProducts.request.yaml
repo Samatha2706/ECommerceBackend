@@ -1,0 +1,6 @@
+$kind: http-request
+description: ""
+url: " https://localhost:7196/api/Product"
+method: GET
+examples: .resources/GetProducts.resources/examples
+order: 3767215525185627

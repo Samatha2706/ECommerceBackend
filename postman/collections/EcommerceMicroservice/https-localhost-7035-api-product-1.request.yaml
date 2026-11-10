@@ -1,0 +1,7 @@
+$kind: http-request
+name: " https://localhost:7035/api/product/1"
+description: ""
+url: " https://localhost:7035/api/product/1"
+method: GET
+examples: .resources/https-localhost-7035-api-product-1.resources/examples
+order: 4493795613769442

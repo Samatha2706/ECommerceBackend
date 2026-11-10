@@ -1,7 +1,14 @@
 <Solution>
-  <Project Path="ECommerce.API/ECommerce.API.csproj" />
-  <Project Path="ECommerce.Application/ECommerce.Application.csproj" />
-  <Project Path="ECommerce.Domain/ECommerce.Domain.csproj" />
-  <Project Path="ECommerce.Infrastructure/ECommerce.Infrastructure.csproj" />
-  <Project Path="ECommerce.Tests/ECommerce.Tests.csproj" />
+  <Folder Name="/Kubernetes/">
+    <File Path="apigateway.yaml" />
+    <File Path="orderservice.yaml" />
+    <File Path="paymentservice.yaml" />
+    <File Path="productservice.yaml" />
+    <File Path="userservice.yaml" />
+  </Folder>
+  <Project Path="ECommerce.ApiGateway/ECommerce.ApiGateway.csproj" Id="78c3ac14-30b4-4d3a-a511-f65cb4654728" />
+  <Project Path="ECommerce.OrderService/ECommerce.OrderService.csproj" Id="cd0f76bf-9c94-4248-8802-d48ef3abe28d" />
+  <Project Path="ECommerce.PaymentService/ECommerce.PaymentService.csproj" Id="224126c8-98c6-4633-a31d-6fcac9b30a16" />
+  <Project Path="ECommerce.ProductService/ECommerce.ProductService.csproj" Id="f1050f2d-8395-4fee-98e9-0b466ddc0f2a" />
+  <Project Path="ECommerce.UserService/ECommerce.UserService.csproj" Id="254e6e58-2f98-49a6-ba16-9f05f9986ba3" />
 </Solution>

@@ -1,7 +1,16 @@
-# Use this workspace to collaborate
 workspace:
   id: 27d4f12b-eefb-42d6-aeec-9d822c02b15b
-
 localResources:
   specs:
     - ../ECommerce.API/obj/Debug/net10.0/EndpointInfo/ECommerce.API.json
+cloudResources:
+  collections:
+    ../postman/collections/EcommerceAPICollectionBackend: 57750318-4ee1f96f-da17-4e1e-84ef-9cc25b968764
+    ../postman/collections/EcommerceMicroservice: 57750318-e8ac3ba1-015f-4f12-9809-d06776b522e7
+    ../postman/collections/ECommerce-API: 57750318-dca8c772-9154-4a6e-97df-8b9d1e687747
+  environments:
+    ../postman/environments/ECommerce Local.environment.yaml: 57750318-35044d47-a073-4b9d-a9d0-d8066e8c18bd
+  specs:
+    ../ECommerce.API/obj/Debug/net10.0/EndpointInfo/ECommerce.API.json: e0558646-1db0-4ad3-a60b-c6e0935639fc
+  globals:
+    ../postman/globals/workspace.globals.yaml: a6434cc4-bc9e-47bf-880a-e330320bf784

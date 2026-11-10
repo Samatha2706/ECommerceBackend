@@ -1,0 +1,6 @@
+$kind: http-request
+name: " https://localhost:7035/api/Product"
+description: ""
+url: " https://localhost:7035/api/Product"
+method: GET
+order: 4463697054252894

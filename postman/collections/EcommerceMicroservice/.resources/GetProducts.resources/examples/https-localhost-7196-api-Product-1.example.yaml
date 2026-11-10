@@ -1,0 +1,24 @@
+$kind: http-example
+name: https://localhost:7196/api/Product
+request:
+  url: " https://localhost:7196/api/Product"
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    content-type: application/json; charset=utf-8
+    date: Sat, 26 Sep 2026 15:58:10 GMT
+    server: Kestrel
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+        "products": [],
+        "pageNumber": 1,
+        "pageSize": 10,
+        "totalCount": 0,
+        "totalPages": 0
+      }
+order: 1790438292967

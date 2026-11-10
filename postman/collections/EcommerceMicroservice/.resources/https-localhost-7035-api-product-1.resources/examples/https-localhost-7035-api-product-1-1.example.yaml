@@ -1,0 +1,29 @@
+$kind: http-example
+name: https://localhost:7035/api/product/1
+request:
+  url: " https://localhost:7035/api/product/1"
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    content-type: application/json; charset=utf-8
+    date: Sun, 27 Sep 2026 12:56:48 GMT
+    server: Kestrel
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+        "id": 1,
+        "sku": "PROD-001",
+        "name": "Updated Product",
+        "description": "Updated",
+        "price": 150,
+        "isActive": true,
+        "categoryId": 1,
+        "categoryName": "Electronics & Gadgets",
+        "availableQuantity": 7,
+        "reorderLevel": 5
+      }
+order: 1790513811011

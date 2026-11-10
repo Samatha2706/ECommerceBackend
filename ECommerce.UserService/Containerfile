@@ -1,0 +1,23 @@
+# Stage 1: Build UserService
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+COPY ECommerce.UserService/ECommerce.UserService.csproj ECommerce.UserService/
+RUN dotnet restore ECommerce.UserService/ECommerce.UserService.csproj
+
+COPY ECommerce.UserService/ ECommerce.UserService/
+
+WORKDIR /src/ECommerce.UserService
+RUN dotnet publish ECommerce.UserService.csproj \
+    -c Release \
+    -o /app/publish \
+    --no-restore
+
+# Stage 2: Run UserService
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
+WORKDIR /app
+
+COPY --from=build /app/publish .
+
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "ECommerce.UserService.dll"]

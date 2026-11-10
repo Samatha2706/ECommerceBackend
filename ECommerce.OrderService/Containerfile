@@ -1,0 +1,23 @@
+# Stage 1: Build OrderService
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+COPY ECommerce.OrderService/ECommerce.OrderService.csproj ECommerce.OrderService/
+RUN dotnet restore ECommerce.OrderService/ECommerce.OrderService.csproj
+
+COPY ECommerce.OrderService/ ECommerce.OrderService/
+
+WORKDIR /src/ECommerce.OrderService
+RUN dotnet publish ECommerce.OrderService.csproj \
+    -c Release \
+    -o /app/publish \
+    --no-restore
+
+# Stage 2: Run OrderService
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
+WORKDIR /app
+
+COPY --from=build /app/publish .
+
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "ECommerce.OrderService.dll"]

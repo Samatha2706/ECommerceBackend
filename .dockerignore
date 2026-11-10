@@ -1,0 +1,8 @@
+.vs/
+**/.vs/
+**/bin/
+**/obj/
+.git/
+
+# Generated container image archives
+*.tar
