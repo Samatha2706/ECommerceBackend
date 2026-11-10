@@ -26,3 +26,6 @@ jobs:
 
       - name: Build solution
         run: dotnet build ECommerceBackend.slnx --configuration Release --no-restore
+
+      - name: Run unit tests
+        run: dotnet test ECommerceBackend.slnx --configuration Release --no-build
